@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+button {
+  border: 1px solid rgb(219, 167, 143);
+  border-radius: 10px;
+  background-color: antiquewhite;
+  padding: 1rem;
+  cursor: pointer;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+button:hover {
+  background-color: bisque;
+}

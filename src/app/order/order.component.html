@@ -1,0 +1,21 @@
+<div class="cart" >
+  <div class="food-list" >
+    <div class="food-item" *ngFor="let item of foodList" (click)="addItemToCart(item)">
+      <p>+ {{ item.name }}</p>
+      <p>R$ {{ item.price }}</p>
+    </div>
+  </div>
+  <div class="order" *ngIf="cartItems.length">
+    <div class="order-list">
+      <h2>Pedido</h2>
+      <div class="order-item" *ngFor="let item of cartItems">
+        <p>x{{ item.quantity }} {{ item.name }}</p>
+        <p>R$ {{ item.price | number : '1.2-2' }}</p>
+      </div>
+    </div>
+    <div class="order-price" >
+      <h1>R$ {{ orderPrice | number : '1.2-2' }}</h1>
+      <button (click)="sendOrder()">Enviar pedido</button>
+    </div>
+  </div>
+</div>

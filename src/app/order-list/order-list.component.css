@@ -1,0 +1,22 @@
+h1 {
+  margin: 0 2rem 2rem 2rem;
+}
+
+.order-list {
+  margin: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  justify-content: center;
+}
+
+.order-item {
+  background-color: burlywood;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+h3 {
+  margin: 0 0 1rem 0;
+}

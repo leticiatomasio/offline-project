@@ -1,0 +1,14 @@
+<h1>Pedidos</h1>
+<div class="order-list">
+  <div class="order-item" *ngFor="let order of orders">
+    <h3>Pedido {{ order.number }}</h3>
+    <div *ngFor="let item of order.items">
+      <span>
+        x{{ item.quantity }}
+      </span>
+      <span>
+        {{ item.name }}
+      </span>
+    </div>
+  </div>
+</div>

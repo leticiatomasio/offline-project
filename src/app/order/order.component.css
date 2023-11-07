@@ -1,0 +1,33 @@
+.cart {
+  margin: 0 2rem;
+}
+
+.food-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.food-item {
+  background-color: burlywood;
+  width: 200px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.food-item:hover {
+  background-color: rgb(242, 222, 196);
+}
+
+.order {
+  display: flex;
+}
+
+.order-price {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
