@@ -1,8 +1,9 @@
-export interface OrderResponse {
-  number: string;
-  items: { name: string, quantity: number }[];
+export interface OrderItem {
+  name: string;
+  quantity: number;
 }
 
-export interface OrderRequest {
+export interface OrderResponse {
+  number: string;
   items: { name: string, quantity: number }[];
 }

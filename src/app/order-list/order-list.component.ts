@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderResponse } from './../../shared/models/order.model';
+import { OrderService } from 'src/shared/services/order/order.service';
+import { SignalRService } from 'src/shared/services/signal-r/signal-r.service';
+import { Observable, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-order-list',
@@ -7,114 +10,31 @@ import { OrderResponse } from './../../shared/models/order.model';
   styleUrls: ['./order-list.component.css']
 })
 export class OrderListComponent implements OnInit {
-  orders: OrderResponse[] = [
-    {
-      number: '0001',
-      items: [
-        {
-          name: 'Hambúrguer',
-          quantity: 1
-        },
-        {
-          name: 'Refrigerante',
-          quantity: 1
-        },
-        {
-          name: 'Batata',
-          quantity: 2
-        }
-      ]
-    },
-    {
-      number: '0002',
-      items: [
-        {
-          name: 'Hambúrguer',
-          quantity: 1
-        },
-        {
-          name: 'Refrigerante',
-          quantity: 1
-        },
-        {
-          name: 'Batata',
-          quantity: 2
-        }
-      ]
-    },
-    {
-      number: '0003',
-      items: [
-        {
-          name: 'Hambúrguer',
-          quantity: 1
-        },
-        {
-          name: 'Refrigerante',
-          quantity: 1
-        },
-        {
-          name: 'Batata',
-          quantity: 2
-        }
-      ]
-    },
-    {
-      number: '0004',
-      items: [
-        {
-          name: 'Hambúrguer',
-          quantity: 1
-        },
-        {
-          name: 'Refrigerante',
-          quantity: 1
-        },
-        {
-          name: 'Batata',
-          quantity: 2
-        }
-      ]
-    },
-    {
-      number: '0005',
-      items: [
-        {
-          name: 'Hambúrguer',
-          quantity: 1
-        },
-        {
-          name: 'Refrigerante',
-          quantity: 1
-        },
-        {
-          name: 'Batata',
-          quantity: 2
-        }
-      ]
-    },
-    {
-      number: '0006',
-      items: [
-        {
-          name: 'Hambúrguer',
-          quantity: 1
-        },
-        {
-          name: 'Refrigerante',
-          quantity: 1
-        },
-        {
-          name: 'Batata',
-          quantity: 2
-        }
-      ]
-    },
-  ]
+  orders: OrderResponse[];
 
-  constructor() { }
+  constructor(
+    private orderService: OrderService,
+    private signalR: SignalRService
+  ) { }
 
   ngOnInit() {
+    this.startSignalRConnection();
+    this.watchForNotification();
+    this.getOrders().subscribe(res => this.orders = res);
   }
 
+  private startSignalRConnection() {
+    this.signalR.startConnection();
+  }
+
+  private watchForNotification() {
+    this.signalR.emitSignalRNotification$.pipe(
+      switchMap(res => this.getOrders()),
+      tap(orders => this.orders = orders)
+    ).subscribe();
+  }
+
+  private getOrders(): Observable<OrderResponse[]> {
+    return this.orderService.getAll();
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { OrderService } from 'src/shared/services/order/order.service';
 
 @Component({
   selector: 'app-order',
@@ -38,7 +39,7 @@ export class OrderComponent implements OnInit {
 
   cartItems: any[] = [];
 
-  constructor() { }
+  constructor(private orderService: OrderService) { }
 
   ngOnInit() {}
 
@@ -56,9 +57,8 @@ export class OrderComponent implements OnInit {
   }
 
   sendOrder() {
-    const order = {
-      items: this.cartItems
-    }
-    this.cartItems = [];
+    this.orderService.create(this.cartItems).subscribe(res => {
+      this.cartItems = [];
+    })
   }
 }
